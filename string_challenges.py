@@ -43,5 +43,5 @@ words_len = []
 for word in sentence.split(" "):
     words_len.append(len(word))
 
-print(sum(words_len)/len(sentence))
+print(sum(words_len)/len(sentence.split(" ")))
 # ???
