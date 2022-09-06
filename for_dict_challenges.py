@@ -16,7 +16,7 @@ data = dict()
 for student in students:#sorted(students, key=lambda d: d['first_name']):
     name = student['first_name']
     if data.get(name):
-        data[name] = data[name] + 1
+        data[name] += 1
     else:
         data[name] = 1
 for k, v in data.items():
@@ -147,7 +147,7 @@ for klass in school:
 
     data[klass['class']] = (len(klass['students']) - male_count,male_count)
 
-sorted_data = dict(sorted(data.items(),key=lambda item: item[1][1], reverse=True))
+sorted_data = dict(sorted(data.items(),key=lambda item: item[1][1], reverse=True)) # тут шо та ругается idea "unexpected type"
 
 final_data = dict(zip(('Больше всего мальчиков в классе','Больше всего девочек'), sorted_data.keys())) # не по питонячьи много скобок больше скобок богу скобок
 for k,v in final_data.items():
