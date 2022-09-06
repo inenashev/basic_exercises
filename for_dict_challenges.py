@@ -45,7 +45,7 @@ for student in students:
 # весьма эзотерически выглядит, да, суть в том что я сортирую частотный словарь по значениям и беру последний элемент
 most_frequent = sorted(data.items(), key=lambda item: item[1])[-1] # слава StackOverflow, а можно без лямбда-функций запилить?
 
-print(f'\n{most_frequent[0]}: {most_frequent[1]}\n')
+print(f'\nСамое частое имя среди учеников: {most_frequent[0]}\n')
 # ???
 
 
