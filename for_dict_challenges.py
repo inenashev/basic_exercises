@@ -42,9 +42,10 @@ for student in students:
         data[name] = data[name] + 1
     else:
         data[name] = 1
-# весьма эзотерически выглядит, да
+# весьма эзотерически выглядит, да, суть в том что я сортирую частотный словарь по значениям и беру последний элемент
 most_frequent = sorted(data.items(), key=lambda item: item[1])[-1] # слава StackOverflow, а можно без лямбда-функций запилить?
-print(f'\n{most_frequent[0]}: {most_frequent[1]}')
+
+print(f'\n{most_frequent[0]}: {most_frequent[1]}\n')
 # ???
 
 
@@ -70,8 +71,24 @@ school_students = [
         {'first_name': 'Саша'},
     ],
 ]
+
+def count_occurances_dry(input_list):
+    data = dict()
+    for student in input_list:
+        name = student['first_name']
+        if data.get(name):
+            data[name] = data[name] + 1
+        else:
+            data[name] = 1
+    return data
 # ???
 
+
+for index, class_element in enumerate(school_students, 1):
+    names_frq = count_occurances_dry(class_element)
+    # можно этого не делать, на конкретно этих данных все ок получается сразу но вообще говоря так не обязано быть
+    most_frequent = sorted(names_frq.items(), key=lambda item: item[1], reverse=True)[0]
+    print(f'Самое частое имя в классе {index}: {most_frequent[0]}')
 
 # Задание 4
 # Для каждого класса нужно вывести количество девочек и мальчиков в нём.
@@ -92,6 +109,15 @@ is_male = {
     'Даша': False,
 }
 # ???
+print()
+for klass in school:
+    male_count = 0
+    for student in klass['students']:
+        if is_male[student['first_name']]:
+            male_count += 1
+    print(f"Класс {klass['class']}: девочки {len(klass['students']) - male_count}, мальчики {male_count}")
+
+
 
 
 # Задание 5
@@ -111,4 +137,19 @@ is_male = {
     'Миша': True,
 }
 # ???
+print()
+data = dict()
+for klass in school:
+    male_count = 0
+    for student in klass['students']:
+        if is_male[student['first_name']]:
+            male_count += 1
+
+    data[klass['class']] = (len(klass['students']) - male_count,male_count)
+
+sorted_data = dict(sorted(data.items(),key=lambda item: item[1][1], reverse=True))
+
+final_data = dict(zip(('Больше всего мальчиков в классе','Больше всего девочек'), sorted_data.keys())) # не по питонячьи много скобок больше скобок богу скобок
+for k,v in final_data.items():
+    print(f'{k} в классе {v}')
 
