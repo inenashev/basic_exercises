@@ -12,6 +12,15 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Петя'},
 ]
+data = dict()
+for student in students:#sorted(students, key=lambda d: d['first_name']):
+    name = student['first_name']
+    if data.get(name):
+        data[name] = data[name] + 1
+    else:
+        data[name] = 1
+for k, v in data.items():
+    print(f'{k}: {v}')
 # ???
 
 
@@ -26,6 +35,16 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Оля'},
 ]
+data = dict()
+for student in students:
+    name = student['first_name']
+    if data.get(name):
+        data[name] = data[name] + 1
+    else:
+        data[name] = 1
+# весьма эзотерически выглядит, да
+most_frequent = sorted(data.items(), key=lambda item: item[1])[-1] # слава StackOverflow, а можно без лямбда-функций запилить?
+print(f'\n{most_frequent[0]}: {most_frequent[1]}')
 # ???
 
 
