@@ -13,9 +13,10 @@ print(word.lower().count('а')) #если привести к регистру
 
 # Вывести количество гласных букв в слове
 word = 'Архангельск'
-v_string = "«а» «у» «о» «и» «э» «ы» «я» «ю» «е» «ё»"
-vowels = v_string.replace("«", "").replace("»", "").split(" ")
+#v_string = "«а» «у» «о» «и» «э» «ы» «я» «ю» «е» «ё»"
+#vowels = v_string.replace("«", "").replace("»", "").split(" ")
 lower_case_word = word.lower()
+vowels = ['а', 'у', 'о', 'и', 'э', 'ы', 'я', 'ю', 'е', 'ё']
 #print(len(set(lower_case_word) & set(vowels)))
 vowel_count = 0
 for char in lower_case_word:

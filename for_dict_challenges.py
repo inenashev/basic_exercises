@@ -43,7 +43,8 @@ for student in students:
     else:
         data[name] = 1
 # весьма эзотерически выглядит, да, суть в том что я сортирую частотный словарь по значениям и беру последний элемент
-most_frequent = sorted(data.items(), key=lambda item: item[1])[-1] # слава StackOverflow, а можно без лямбда-функций запилить?
+#most_frequent = sorted(data.items(), key=lambda item: item[1])[-1] # слава StackOverflow, а можно без лямбда-функций запилить?
+most_frequent = max(data.items(),key= lambda x: x[1]) # вроде как поиск максимумума обходит словарь 1 раз а сортировка нескольо раз потому так кошернее
 
 print(f'\nСамое частое имя среди учеников: {most_frequent[0]}\n')
 # ???
@@ -87,7 +88,8 @@ def count_occurances_dry(input_list):
 for index, class_element in enumerate(school_students, 1):
     names_frq = count_occurances_dry(class_element)
     # можно этого не делать, на конкретно этих данных все ок получается сразу но вообще говоря так не обязано быть
-    most_frequent = sorted(names_frq.items(), key=lambda item: item[1], reverse=True)[0]
+    #most_frequent = sorted(names_frq.items(), key=lambda item: item[1], reverse=True)[0]
+    most_frequent = max(names_frq.items(),key=lambda x: x[1])
     print(f'Самое частое имя в классе {index}: {most_frequent[0]}')
 
 # Задание 4
@@ -147,9 +149,13 @@ for klass in school:
 
     data[klass['class']] = (len(klass['students']) - male_count,male_count)
 
-sorted_data = dict(sorted(data.items(),key=lambda item: item[1][1], reverse=True)) # тут шо та ругается idea "unexpected type"
-
-final_data = dict(zip(('Больше всего мальчиков в классе','Больше всего девочек'), sorted_data.keys())) # не по питонячьи много скобок больше скобок богу скобок
+#sorted_data = dict(sorted(data.items(),key=lambda item: item[1][1], reverse=True)) # тут шо та ругается idea "unexpected type"
+data_max = max(data.items(),key=lambda item: item[1][1])
+data_min = min(data.items(),key=lambda item: item[1][1])
+sorted_data = (data_max,data_min)
+#sorted_data.append(dict(min(data.items(),key=lambda item: item[1][1])))
+#print(list(sorted_data))
+final_data = dict(zip(('Больше всего мальчиков в классе','Больше всего девочек'), dict(sorted_data).keys())) # не по питонячьи много скобок больше скобок богу скобок
 for k,v in final_data.items():
     print(f'{k} в классе {v}')
 
